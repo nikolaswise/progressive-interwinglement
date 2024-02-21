@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>
+     Testing Web Components
+   </title>
+   <style type="text/css">
+     details,
+     summary {
+      display: inline;
+     }
+     summary:after {
+      content: '❓';
+      cursor: pointer;
+     }
+     dfn {
+      position: absolute;
+      background-color: white;
+      border: 1px solid gray;
+      padding: 0.25rem;
+      max-width: 25em;
+     }
+   </style>
+ </head>
+ <body>
+  <h1
+    property="dct:title">
+    Testing Web Components
+  </h1>
+
+  <p>
+    How can we use a <a
+      href="/web-components" property="dc:related" is="rdf-related">web component</a> to progressively enhance an RDFa-enriched link with a preview element?
+  </p>
+
+  <h2>How Does it work?</h2>
+  <ol>
+    <li>
+      Create two HTML pages with RDFa data in their markup. Create a link between the two with the <code>is="rdf-related"</code> attribute on the <code>a</code> tag.
+    </li>
+    <li>
+      In a <code>js</code> file, register a new HTML custom element that extends the <code>a</code> tag. Load it on the HTML page that has the link.
+    </li>
+    <li>
+      Parse the resulting rdfa string to rudimentary json-ld.
+    </li>
+    <li>Adjust the DOM node to attach the fetched data to the UI.</li>
+  </ol>
+
+
+  <script
+    type="module"
+    src="/jsonld.esm.min.js"></script>
+  <script
+    src="/rdfa.js"></script>
+  <script
+    async
+    defer
+    src="/rdf-related.js"></script>
+ </body>
+ </html>
