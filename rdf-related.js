@@ -9,21 +9,20 @@
 // fuckit I just attached these to the global scope
 // ill figure out to do it properly fuckin … later
 
-
 // accept raw html string and return a json object
 const rdfa2json = (htmlString) => {
   const parser = new DOMParser()
   let html = parser
     .parseFromString(htmlString, "text/html")
-  console.log([...html.querySelectorAll('[typeof]')])
   const propertyNodes = [...html.querySelectorAll('[property]')]
   let predicates = propertyNodes.map(node => {
     let obj = {}
-    obj[node.getAttribute("property")] = node.textContent.trim()
+    obj[node.getAttribute("property")] = node.getAttribute('href') || node.textContent.trim()
     return obj
   })
   return Object.assign({
     "@context": `${window.location.origin}/context.json`,
+    "@type": html.querySelector('[typeof]').getAttribute('typeof'),
     "@id": html.baseURI
   }, ...predicates)
 }
@@ -35,13 +34,14 @@ const getRDF = async (uri) => {
   // that for the fun stuff.
   let data = await fetch(uri)
   let txt = await data.text()
-  let json = rdfa2json(txt)
 
   // or … i guess … write my own …
   // rdfa parser……………
   // <uri> <node.property> <node.href || node.innerText>
   // basic but probably could be done really simply
   // just to work for _my_ use cases.
+  let json = rdfa2json(txt)
+  // that was p simple honestly and could be expanded.
   return json
 }
 
