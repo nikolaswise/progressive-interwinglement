@@ -6,10 +6,13 @@ class FlexTerm extends HTMLElement {
   }
 
   async connectedCallback() {
+    const key = this.getAttribute("show");
     const a = this.querySelector('a')
     const uri = a.getAttribute("href")
     let jsonld = await getRDF(uri)
-    a.innerText = jsonld['skos:prefLabel']
+    a.innerText = jsonld[key]
+      ? jsonld[key]
+      : a.innerText
   }
 }
 
