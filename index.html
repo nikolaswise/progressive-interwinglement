@@ -11,7 +11,8 @@
      summary {
       display: inline;
      }
-     summary:after {
+     summary:after,
+     show-preview:after {
       content: '❓';
       cursor: pointer;
      }
@@ -31,8 +32,27 @@
   </h1>
 
   <p>
-    How can we use a <a
-      href="/web-components" property="dc:related" is="rdf-related">web component</a> to progressively enhance an RDFa-enriched link with a preview element?
+    How can we use a
+    <show-preview>
+      <a
+        href="/web-components"
+        property="dc:related">
+        web component
+      </a>
+    </show-preview>
+    to progressively enhance an RDFa-enriched link with a preview element?
+  </p>
+  <p>
+    We can also do thinkgs like link to a
+    <flex-term
+      show="skos:prefLabel">
+      <a
+        property="dc:mentions"
+        href="/flexible-term">
+      dynamic concept
+      </a>
+    </flex-term>
+    that can change over time, where we always want to display the current preferred label.
   </p>
 
   <h2>How Does it work?</h2>
@@ -48,16 +68,12 @@
     </li>
     <li>Adjust the DOM node to attach the fetched data to the UI.</li>
   </ol>
-
-
-  <script
+  <script async defer
     type="module"
-    src="/jsonld.esm.min.js"></script>
-  <script
-    src="/rdfa.js"></script>
-  <script
-    async
-    defer
-    src="/rdf-related.js"></script>
+    src="/show-preview.js"></script>
+  <script async defer
+    type="module"
+    src="/flex-term.js"></script>
+
  </body>
  </html>
