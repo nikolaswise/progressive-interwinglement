@@ -2,7 +2,6 @@ import getRDF from './getRDF.js'
 
 class ShowPreview extends HTMLElement {
   constructor() {
-    console.log('is this working?')
     super()
   }
 
